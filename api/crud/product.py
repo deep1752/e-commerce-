@@ -56,3 +56,6 @@ def update_product(db: Session, product_id: int, product_data: ProductUpdate):
 def get_all_products(db:Session):
 
     return db.query(Product).all()
+
+def get_active_products(db: Session):
+    return db.query(Product).filter(Product.status == "active").all()

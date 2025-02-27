@@ -8,6 +8,7 @@ class Review(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     order_id = Column(Integer, ForeignKey("orders.id"), nullable=False)
+    
     product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
     rating = Column(Integer, nullable=False)  # Ensure values are between 1-5
     review = Column(String(500), nullable=True)  # Review text (optional)

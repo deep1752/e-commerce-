@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from api.database.connection import get_db
 from api.database.schemas.product import ProductResponse,ProductCreate, ProductUpdate
-from api.crud.product import create_product, delete_product,update_product, get_all_products
+from api.crud.product import create_product, delete_product,update_product, get_all_products, get_active_products
 from typing import List
 
 # Creating an API router instance for handling user-related routes
@@ -27,3 +27,7 @@ def list_product(db: Session = Depends(get_db)):
     return get_all_products(db)
 
 
+# Get all active products
+@router.get("/active", response_model=List[ProductResponse])
+def get_active(db: Session = Depends(get_db)):
+    return get_active_products(db)

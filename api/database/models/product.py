@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, func
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float,Enum, func 
 from sqlalchemy.orm import relationship
 from api.database.connection import Base
 
@@ -9,6 +9,7 @@ class Product(Base):
     category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
     name = Column(String(255), nullable=False, unique=True)
     description = Column(String(255), nullable=True)
+    status = Column(Enum("Active", "Inactive", name="product_status"), default="Active", nullable=False)
     mrp = Column(Float, nullable=False)
     net_price = Column(Float, nullable=False)
     quantity_in_stock = Column(Integer, nullable=False, default=0)

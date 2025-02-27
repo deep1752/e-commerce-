@@ -26,13 +26,7 @@ def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes
 
 # Function to retrieve the currently authenticated user
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-    """
-    Decodes the JWT token to extract user information and validate authentication.
-    
-    :param token: JWT token retrieved from the request header.
-    :param db: Database session dependency.
-    :return: Authenticated user object.
-    """
+   
     credentials_exception = HTTPException(status_code=401, detail="Could not validate credentials")
     try:
         # Decode the JWT token

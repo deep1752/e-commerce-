@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
+from typing import Literal
 
 # User creation schema
 class ProductCreate(BaseModel):
@@ -7,6 +8,7 @@ class ProductCreate(BaseModel):
     category_id : int 
     name : str 
     description : str 
+    status: Literal["Active", "Inactive"]
     mrp : float
     net_price : float
     quantity_in_stock : int 
@@ -20,6 +22,7 @@ class ProductResponse(BaseModel):
     category_id : int 
     name : str 
     description : str 
+    status: Literal["Active", "Inactive"]
     mrp : float
     net_price : float
     quantity_in_stock : int 
