@@ -45,3 +45,7 @@ def get_pending_orders(db: Session):
 
 def get_all_delivered_orders(db: Session):
     return db.query(Order).filter(Order.status == "delivered").all()
+
+def get_all_orders(db:Session):
+
+    return db.query(Order).all()
