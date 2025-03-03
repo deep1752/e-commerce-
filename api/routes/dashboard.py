@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from api.database.connection import get_db
-from api.crud.order import get_latest_orders, get_last_month_revenue, get_last_three_months_revenue, get_pending_orders, get_all_delivered_orders
+from api.crud.dashboard import get_latest_orders, get_last_month_revenue, get_last_three_months_revenue, get_pending_orders, get_all_delivered_orders
 
 router = APIRouter()
 @router.get("/analytics")
