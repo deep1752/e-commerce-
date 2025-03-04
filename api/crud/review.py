@@ -23,3 +23,4 @@ def create_review(db: Session,  review: ReviewCreate):
 def get_all_reviews(db:Session):
 
     return db.query(Review).all()
+

@@ -7,7 +7,7 @@ class ReviewCreate(BaseModel):
     user_id : int 
     order_id : int 
     product_id : int 
-    rating: int = Field(..., ge=5, le=5) 
+    rating: int 
     review : str 
     created_at : datetime
 # Response model (excluding sensitive data)
@@ -17,7 +17,7 @@ class ReviewResponse(BaseModel):
     user_id : int 
     order_id : int 
     product_id : int 
-    rating: int = Field(..., ge=5, le=5) 
+    rating: int 
     review : str 
     created_at : datetime
 
