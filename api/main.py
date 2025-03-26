@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from api.routes import auth, users,category,product,address,cart,review,order, dashboard
 from api.database.connection import engine
 from api.database.base import Base
+from fastapi.middleware.cors import CORSMiddleware
 
 # Create database tables if they don't exist
 Base.metadata.create_all(bind=engine)
@@ -9,6 +10,16 @@ Base.metadata.create_all(bind=engine)
 
 # Initialize FastAPI app
 app = FastAPI()
+
+
+# Enable CORS for frontend requests
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Adjust based on your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Include authentication-related routes
 app.include_router(auth.router, prefix="/auth", tags=["Auth"])
