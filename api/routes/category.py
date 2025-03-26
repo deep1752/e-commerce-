@@ -23,6 +23,6 @@ def delete(category_id:int, db:Session = Depends(get_db)):
 def update(category_id: int, category_data: CategoryUpdate, db: Session = Depends(get_db)):
     return update_category(db, category_id, category_data)
 
-@router.get("/all category", response_model=List[CategoryResponse])
+@router.get("/all_category", response_model=List[CategoryResponse])
 def list_category(db: Session = Depends(get_db)):
     return get_all_categories(db)

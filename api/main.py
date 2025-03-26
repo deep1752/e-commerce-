@@ -37,10 +37,3 @@ app.include_router(review.router, prefix="/review", tags=["Review"])
 app.include_router(dashboard.router, prefix="/dashbord", tags=["Dashboard"])
 
 
-
-
-# git init
-# git remote add origin https://github.com/your-username/your-repo.git
-# git remote -v
-# git commit -m "Added new feature in orders"
-# git push -u origin main

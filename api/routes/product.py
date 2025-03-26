@@ -22,7 +22,7 @@ def delete(product_id:int, db:Session = Depends(get_db)):
 def update(product_id: int, product_data: ProductUpdate, db: Session = Depends(get_db)):
     return update_product(db, product_id, product_data)
 
-@router.get("/all product", response_model=List[ProductResponse])
+@router.get("/all_product", response_model=List[ProductResponse])
 def list_product(db: Session = Depends(get_db)):
     return get_all_products(db)
 

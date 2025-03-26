@@ -13,6 +13,6 @@ def add(review: ReviewCreate , db:Session = Depends(get_db)):
     
     return create_review(db,review)
 
-@router.get("/all review", response_model=List[ReviewResponse])
+@router.get("/all_review", response_model=List[ReviewResponse])
 def list_review(db: Session = Depends(get_db)):
     return get_all_reviews(db)

@@ -14,12 +14,12 @@ def get_profile(current_user: UserResponse = Depends(get_current_user)):
 
     return current_user
 
-@router.put("/profile update/", response_model=dict)
+@router.put("/profile_update/", response_model=dict)
 def update(user_id: int, user_data: UserProfileUpdate, db: Session = Depends(get_db)):
     return update_user_profile(db, user_id, user_data)
 
 
-@router.put("/users/update-password")
+@router.put("/users/update_password")
 def update_password(
     email: str, 
     password_data: UserPasswordUpdate, 

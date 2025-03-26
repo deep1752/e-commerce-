@@ -14,7 +14,7 @@ def add(order: OrderCreate , db:Session = Depends(get_db)):
     return create_order(db,order)
 
 
-@router.get("/all order", response_model=List[OrderResponse])
+@router.get("/all_order", response_model=List[OrderResponse])
 def list_order(db: Session = Depends(get_db)):
     return get_all_orders(db)
 
