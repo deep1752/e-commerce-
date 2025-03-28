@@ -9,15 +9,24 @@ from api.security import verify_password
 def create_user(db: Session, user: UserCreate):
     
     db_user = User(
-        name=user.name,
-        email=user.email,
-        password=hash_password(user.password),  # Hash the password before storing
-        mob_number=user.mob_number,
-        role = user.role,
-        created_at = user.created_at,
-        updated_at = user.updated_at
 
-        
+         
+        firstName = user.firstName,
+        middleName = user.middleName,
+        lastName = user.lastName,
+        email = user.email,
+        password=hash_password(user.password),
+        address1 = user.address1,
+        address2 = user.address2,
+        address3 = user.address3,
+        country = user.country,
+        state = user.state,
+        city = user.city,
+        zip = user.zip,
+        number = user.number,
+        alternateNumber = user.alternateNumber,
+        alternateEmail = user.alternateEmail
+  
     )
     db.add(db_user)  # Add the user to the database session
     db.commit()  # Commit the transaction to save changes
@@ -61,3 +70,16 @@ def update_user_password(db: Session, user: User, new_password: str):
     db.commit()
     db.refresh(user)
     return user
+
+def delete_user(db: Session, email: str, password: str):
+    user = db.query(User).filter(User.email == email).first()
+    
+    if not user:
+        return {"success": False, "message": "User not found"}
+    
+    if not verify_password(password, user.password):
+        return {"success": False, "message": "Incorrect password"}
+
+    db.delete(user)
+    db.commit()
+    return {"success": True, "message": "User deleted successfully"}

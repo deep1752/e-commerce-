@@ -1,34 +1,87 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, field_validator
 from datetime import datetime
 from enum import Enum
+from typing import Optional
 
 # Define Enum for Role
 class UserRole(str, Enum):
     customer = "customer"
     admin = "admin"
 
-# User creation schema
 class UserCreate(BaseModel):
-    name: str
+    firstName: str
+    middleName: Optional[str] = None
+    lastName: str
     email: EmailStr
+    confirmEmail: EmailStr
     password: str
-    mob_number: str
-    role: UserRole
-    created_at: datetime = datetime.utcnow()
-    updated_at: datetime = datetime.utcnow()
+    confirmPassword: str
+    address1: str
+    address2: Optional[str] = None
+    address3: Optional[str] = None
+    country: str
+    state: str
+    city: str
+    zip: str
+    number: str
+    alternateNumber: Optional[str] = None
+    alternateEmail: Optional[str] = None
+
+
+ 
+
+    @field_validator("confirmEmail")
+    @classmethod
+    def email_must_match(cls, confirmEmail, info):
+        if confirmEmail != info.data.get("email"):
+            raise ValueError("Emails do not match")
+        return confirmEmail
+
+    @field_validator("confirmPassword")
+    @classmethod
+    def password_must_match(cls, confirmPassword, info):
+        if confirmPassword != info.data.get("password"):
+            raise ValueError("Passwords do not match")
+        return confirmPassword
 
 # Response model (excluding sensitive data)
 class UserResponse(BaseModel):
     id: int
-    name: str
-    email: EmailStr
-    mob_number: str
+    firstName: str
+    middleName: Optional[str] = None
+    lastName: str
+    address1: str
+    address2: Optional[str] = None
+    address3: Optional[str] = None
+    country: str
+    state: str
+    city: str
+    zip: str
+    number: str
+    alternateNumber: Optional[str] = None
+    alternateEmail: Optional[str] = None
+
+
+    class Config:
+        from_attributes = True
+   
 
 class UserProfileUpdate(BaseModel):
 
-    name: str
-    email: EmailStr
-    mob_number: str
+    firstName: str
+    middleName: Optional[str] = None
+    lastName: str
+    address1: str
+    address2: Optional[str] = None
+    address3: Optional[str] = None
+    country: str
+    state: str
+    city: str
+    zip: str
+    number: str
+    alternateNumber: Optional[str] = None
+    alternateEmail: Optional[str] = None
+ 
     
 
     # Pydantic schema for password update
@@ -44,4 +97,5 @@ class UserPasswordUpdate(BaseModel):
 # User login schema
 class UserLogin(BaseModel):
     email: EmailStr
+    
     password: str

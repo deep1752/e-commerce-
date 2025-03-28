@@ -4,7 +4,7 @@ from typing import List
 from api.database.connection import get_db
 from api.database.schemas.category import CategoryResponse, CategoryCreate, CategoryUpdate
 from api.crud.category import create_category,delete_category, update_category, get_all_categories
-
+from api.database.models.category import Category 
 # Creating an API router instance for handling user-related routes
 router = APIRouter()
 
@@ -23,6 +23,12 @@ def delete(category_id:int, db:Session = Depends(get_db)):
 def update(category_id: int, category_data: CategoryUpdate, db: Session = Depends(get_db)):
     return update_category(db, category_id, category_data)
 
-@router.get("/all_category", response_model=List[CategoryResponse])
-def list_category(db: Session = Depends(get_db)):
-    return get_all_categories(db)
+# @router.get("/all_category", response_model=List[CategoryResponse])
+# def list_category(db: Session = Depends(get_db)):
+#     return get_all_categories(db)
+
+
+@router.get("/all_category", response_model=List[dict])
+def get_categories(db: Session = Depends(get_db)):
+    categories = db.query(Category).all()
+    return [{"id": cat.id, "name": cat.name} for cat in categories]  

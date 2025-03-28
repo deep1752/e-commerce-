@@ -12,9 +12,7 @@ class CategoryResponse(BaseModel):
 
     id: int
     name: str
-    created_at: datetime = datetime.utcnow()
-    updated_at: datetime = datetime.utcnow()
-
+    
 class CategoryUpdate(BaseModel):
 
     name : str
@@ -22,3 +20,11 @@ class CategoryUpdate(BaseModel):
     class Config:
         from_attributes = True
 
+
+
+class CategoryBase(BaseModel):
+    id: int
+    name: str
+
+    class Config:
+        from_attributes = True  # Ensure SQLAlchemy compatibility
