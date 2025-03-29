@@ -10,9 +10,7 @@ def create_cart(db: Session,  cart: CartCreate):
         user_id = cart.user_id,
         product_id = cart.product_id,
         quantity = cart.quantity,
-        created_at = cart.created_at
-
-        
+        created_at = cart.created_at      
 
     )
     db.add(db_cart)  # Add the user to the database session

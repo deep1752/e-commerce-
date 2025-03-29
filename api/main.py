@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api.routes import auth, users,category,product,address,cart,review,order, dashboard
+from api.routes import auth, users,category,product,address,cart,review,order, dashboard,registerNow , marriage
 from api.database.connection import engine
 from api.database.base import Base
 from fastapi.middleware.cors import CORSMiddleware
@@ -26,6 +26,15 @@ app.include_router(auth.router, prefix="/auth", tags=["Auth"])
 
 # Include user-related routes
 app.include_router(users.router, prefix="/users", tags=["Users"])
+
+
+# Include user-related routes
+app.include_router(registerNow.router, prefix="/registerNow", tags=["RegisterNow"])
+
+
+# Include user-related routes
+app.include_router(marriage.router, prefix="/marriage", tags=["Marriage"])
+
 
 # Include produt-related routes
 app.include_router(category.router, prefix="/category", tags=["Category"])
