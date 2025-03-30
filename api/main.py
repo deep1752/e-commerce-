@@ -4,13 +4,12 @@ from api.database.connection import engine
 from api.database.base import Base
 from fastapi.middleware.cors import CORSMiddleware
 
+
 # Create database tables if they don't exist
 Base.metadata.create_all(bind=engine)
 
-
 # Initialize FastAPI app
 app = FastAPI()
-
 
 # Enable CORS for frontend requests
 app.add_middleware(
@@ -27,14 +26,11 @@ app.include_router(auth.router, prefix="/auth", tags=["Auth"])
 # Include user-related routes
 app.include_router(users.router, prefix="/users", tags=["Users"])
 
-
 # Include user-related routes
 app.include_router(registerNow.router, prefix="/registerNow", tags=["RegisterNow"])
 
-
 # Include user-related routes
 app.include_router(marriage.router, prefix="/marriage", tags=["Marriage"])
-
 
 # Include produt-related routes
 app.include_router(category.router, prefix="/category", tags=["Category"])
