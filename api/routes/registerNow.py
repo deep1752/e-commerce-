@@ -16,9 +16,7 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     existing_user = get_user_by_email(db, user.email)
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
-
     new_user = create_user(db, user)
-
     return JSONResponse(
         status_code=201,
         content={
